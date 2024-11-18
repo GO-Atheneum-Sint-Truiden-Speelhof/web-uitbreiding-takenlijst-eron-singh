@@ -1,0 +1,5 @@
+1. data bank maken 
+deadline
+instructies 
+titel
+primarykey
