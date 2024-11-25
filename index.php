@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost";
 $username = "root";
-$password = "";
+$password = "ishpal";
 $dbname = "taak";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -26,7 +26,10 @@ $result = $conn->query($sql);
     <title>TaakLijst</title>
 </head>
 
+
 <body>
+
+
     <h1>Taakbeheer</h1>
 
     <div>
