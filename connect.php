@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost";
 $username = "root";
-$password = "ishpal";
+$password = "";
 $dbname = "taak";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -19,7 +19,6 @@ $sql = "INSERT INTO taak (Taaknaam, Title, instructies, Deadline) VALUES ('$taak
 
 if ($conn->query($sql) === TRUE) {
     header("Location: index.php");
-    exit;
 } else {
     echo "Fout bij toevoegen: " . $conn->error;
 }
