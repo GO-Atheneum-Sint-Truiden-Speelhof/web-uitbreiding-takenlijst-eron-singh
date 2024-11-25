@@ -27,7 +27,10 @@ $result = $conn->query($sql);
 </head>
 
 <body>
+<?php include("include/nav.php"); ?>
+
     <h1>Taakbeheer</h1>
+    
 
     <div>
         <h2>Nieuwe Taak Toevoegen</h2>
