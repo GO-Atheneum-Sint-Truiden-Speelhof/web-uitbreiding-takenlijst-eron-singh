@@ -9,7 +9,7 @@
     $servername='localhost'
     $database="taak"
     $db_user='root';
-    $db_password='';
+    $db_password='ishpal';
 
     $conn= new mysqli($servername, $db_user, $db_pwd,$database);
     if($conn-> connect_errno){

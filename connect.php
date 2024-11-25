@@ -10,19 +10,27 @@ if ($conn->connect_error) {
     die("Verbinding mislukt: " . $conn->connect_error);
 }
 
-$taaknaam = $_POST['Taaknaam'];
-$title = $_POST['Title'];
-$instructies = $_POST['instructies'];
-$deadline = $_POST['Deadline'];
+if (isset($_POST['Taaknaam'], $_POST['Title'], $_POST['instructies'], $_POST['Deadline'])) {
+    $taaknaam = $_POST['Taaknaam'];
+    $title = $_POST['Title'];
+    $instructies = $_POST['instructies'];
+    $deadline = $_POST['Deadline'];
 
-$sql = "INSERT INTO taak (Taaknaam, Title, instructies, Deadline) VALUES ('$taaknaam', '$title', '$instructies', '$deadline')";
-
-if ($conn->query($sql) === TRUE) {
-    header("Location: index.php");
-    exit;
+    $stmt = $conn->prepare("INSERT INTO taak (Taaknaam, Title, instructies, Deadline) VALUES (?, ?, ?, ?)");
+    if ($stmt) {
+        $stmt->bind_param("ssss", $taaknaam, $title, $instructies, $deadline);
+        if ($stmt->execute()) {
+            header("Location: index.php");
+        } else {
+            echo "Fout bij toevoegen: " . $stmt->error;
+        }
+        $stmt->close();
+    } else {
+        echo "Fout bij voorbereiden van statement: " . $conn->error;
+    }
 } else {
-    echo "Fout bij toevoegen: " . $conn->error;
+    echo "Alle velden zijn verplicht!";
 }
 
-$conn->close();
 ?>
+

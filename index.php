@@ -10,7 +10,7 @@ if ($conn->connect_error) {
     die("Verbinding mislukt: " . $conn->connect_error);
 }
 
-$sql = "SELECT id, Taaknaam, Title, instructies, Deadline FROM taak";
+$sql = "SELECT ID, Taaknaam, Title, instructies, Deadline FROM taak";
 $result = $conn->query($sql);
 ?>
 
@@ -18,14 +18,12 @@ $result = $conn->query($sql);
 <html lang="nl">
 
 <head>
-	<meta charset=utf-8>
-	<meta name="robots" content="all">
-	<link rel="stylesheet" type="text/css" href="opmaak/bootstrap.css">
-	<link rel="stylesheet" type="text/css" href="opmaak/opmaak.css">
-	<link rel="shortcut icon" type="image/gof" href="plaatjes/logo.webp">
-	<title>TaakLijst</title>
-	<script src="scripts/jquery.js"></script>
-	<script src="scripts/bootstrap.js"></script>
+    <meta charset="utf-8">
+    <meta name="robots" content="all">
+    <link rel="stylesheet" type="text/css" href="opmaak/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="opmaak/opmaak.css">
+    <link rel="shortcut icon" type="image/gof" href="plaatjes/logo.webp">
+    <title>TaakLijst</title>
 </head>
 
 <body>
@@ -62,12 +60,31 @@ $result = $conn->query($sql);
             </tr>
         </thead>
         <tbody>
-            
+            <?php
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    echo "<tr>
+                        <td>{$row['Taaknaam']}</td>
+                        <td>{$row['Title']}</td>
+                        <td>{$row['instructies']}</td>
+                        <td>{$row['Deadline']}</td>
+                        <td>
+                            <a href='bewerken.php?id={$row['ID']}'>Bewerken</a> | 
+                            <a href='verwijderen.php?id={$row['ID']}' onclick=\"return confirm('Weet je zeker dat je deze taak wilt verwijderen?');\">Verwijderen</a>
+                        </td>
+                    </tr>";
+                }
+            } else {
+                echo "<tr><td colspan='5'>Geen taken gevonden</td></tr>";
+            }
+            ?>
         </tbody>
     </table>
 </body>
 
 </html>
+
 <?php
 $conn->close();
 ?>
+
