@@ -23,7 +23,7 @@
 * Tabel op index.php wel responsief. bewerk- en login-pagina niet.
 * JavaScript 'validateForm()' staat niet in een apart bestand. (-1)
 
-Je behaalde een score van __24/50__
+Je behaalde een score van __24/35__ en __0/15__
 
 ### Mondelinge verdediging ###
 * Waarom prepared statement bij bewerken en verwijderen maar niet bij tonen?
